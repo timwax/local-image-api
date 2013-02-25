@@ -1,0 +1,76 @@
+<html>
+<head>
+	<title>Image API</title>
+	<link rel="stylesheet" href="./client/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+	<div class="container">
+		<?php include 'templates/fragments/header.php'; ?>
+		<h1>Local Image API.</h1>
+		<p>This API can be used to resize, add filters, crop, extended to integrate in any web application.</p>
+
+		<h3>Features</h3>
+		<ul>
+			<li><a href="./upload">Upload</a></li>
+			<li><a href="./browse">Browse</a></li>
+			<li><a href="./image?p=images/2face_idibia.jpg">Manupulate a single image</a></li>
+		</ul>
+
+		<hr>
+		<h3>Setup</h3>
+		<dl>
+				<dt>Basic required configuration</dt>
+				<dd>
+					In the <code>config.php</code> file in root folder edit the following:
+					<p>
+<pre>
+<code>
+$config['upload_path']['deafult'] 		# Defines where your media images will be stored
+$config['cache_dir'] = '.cache' 		# Defines where your cached media images sizes will be stored
+$config['cache_dir'] = '.cache' 		# Defines where your cached media images sizes will be stored
+</code>
+</pre>
+					</p>
+				</dd>				
+
+				<dt>Atleast one image size with the following format</dt>
+				<dd>
+					In the <code>config.php</code> file in root folder edit the following:
+					<p>
+						<code>
+<pre>
+$config['image_size'][<b>type</b>] = array(
+	'width'=>'200',
+	'height'=>'200', 
+	'aspectratio'=>true,			# Maintain aspect ratio or strech
+	'resize' => 'crop',  			# How image will be resized. Either [ crop, landscape, auto, portrait, exact ]
+	'label'=>'Thumbnail 200 * 200'		# User Interface Label
+);
+</pre>
+						</code>
+					</p>
+				</dd>
+		</dl>
+
+	<h3>Use with existing projects</h3>
+	<p>To use this image API in your local project just make sure you have a way to interact with your project database and create hooks in the plugins folder e.g to use an image on upload: </p>
+	<code>plugins/onupload/your_code_file.php</code><br />
+	<pre>
+function <b>hook_</b>your_code_file($url, $data){
+	/**
+	 * Your code here
+	 * 
+	 * @param url This is the location of the uploaded image
+	 * @param data This is the sent variables $_REQUEST from the broswer on upload
+	 */
+}
+	</pre>
+
+	<hr />
+
+	<h3>Future milestones</h3>
+	<p>Add a database/metadata attachment to files. This will improve on searching/filtering and retreval speed. Also add a composition stack for editing the original element</p>
+	</div>
+	<script type="text/javascript" src="./client/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
